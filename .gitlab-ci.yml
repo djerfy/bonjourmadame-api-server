@@ -19,3 +19,4 @@ Test:
   after_script:
     - docker stop ${CI_PROJECT_NAME}_${CI_PIPELINE_ID}
     - docker rm ${CI_PROJECT_NAME}_${CI_PIPELINE_ID}
+
