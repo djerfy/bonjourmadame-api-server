@@ -1,0 +1,22 @@
+include:
+  - project: xorhak/templates-cicd
+    ref: master
+    file: gitlab-ci-dockerfiles.yml
+
+variables:
+  REGISTRY_DOCKER_IMAGE: "bonjourmadame-api-server"
+  EXECUTE_PIPELINE_TEST_CUSTOM: "true"
+
+Test:
+  extends: .execute_custom
+  script:
+    - docker container run -d --name ${CI_PROJECT_NAME}_${CI_PIPELINE_ID} registry.local/${CI_PROJECT_PATH}:pipeline-${CI_PIPELINE_ID}
+    - docker ps
+    - sleep 60
+    - docker exec ${CI_PROJECT_NAME}_${CI_PIPELINE_ID} bash -c "wget -qO- http://localhost:5000/" | grep "Return a latest url picture for bonjourmadame" || exit 1
+    - docker ps
+    - docker logs ${CI_PROJECT_NAME}_${CI_PIPELINE_ID}
+  after_script:
+    - docker stop ${CI_PROJECT_NAME}_${CI_PIPELINE_ID}
+    - docker rm ${CI_PROJECT_NAME}_${CI_PIPELINE_ID}
+

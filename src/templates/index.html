@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="robots" content="NONE,NOARCHIVE" />
+        <title>BonjourMadame API Server</title>
+        <link rel="stylesheet" type="text/css" href="https://restframework.herokuapp.com/static/rest_framework/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://restframework.herokuapp.com/static/rest_framework/css/bootstrap-tweaks.css"/>
+        <link rel="stylesheet" type="text/css" href="https://restframework.herokuapp.com/static/rest_framework/css/prettify.css"/>
+        <link rel="stylesheet" type="text/css" href="https://restframework.herokuapp.com/static/rest_framework/css/default.css"/>
+    </head>
+
+    <body class="">
+        <div class="wrapper">
+            <div class="navbar navbar-static-top navbar-inverse">
+                <div class="container">
+                    <span>
+                        <a class='navbar-brand' rel="nofollow" href='https://bonjourmadame.xorhak.io'>
+                            BonjourMadame API Server <span class="version">{{version}}</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <br/><br/><br/><br/>
+            <div class="container">
+                <div id="content">
+                    <form id="get-form" class="pull-right">
+                        <fieldset>
+                            <div class="btn-group format-selection">
+                                <a class="btn btn-primary js-tooltip" href='/'
+                                     rel="nofollow" title="GET request">GET</a>
+                            </div>
+                        </fieldset>
+                    </form>
+                <div class="content-main">
+                    <div class="page-header">
+                        <h1>API Documentation</h1>
+                    </div>
+                    <div style="float:left">
+                    </div>
+                    <div class="request-info" style="clear: both" >
+                        <h3>Get a latest picture URL</h3>
+                        <pre class="prettyprint"><b>GET</b> <a href="/api/latest">/api/latest</a></pre>
+                    </div>
+                    <div class="response-info">
+                        <pre class="prettyprint"><span class="meta nocode"><b>HTTP 200 OK</b>
+<b>Content-Type:</b> <span class="lit">application/json</span>
+<b>Vary:</b> <span class="lit">Accept</span>
+<b>Allow:</b> <span class="lit">GET</span>
+</span>{
+    &quot;description&quot;: &quot;Return a latest url picture for bonjourmadame&quot;,
+    &quot;node&quot;: &quot;30fb3d5ac12b&quot;,
+    &quot;title&quot;: &quot;BonjourMadame, Friday 23 (latest)&quot;,
+    &quot;retry&quot;: 0,
+    &quot;url&quot;: &quot;https://i0.wp.com/bonjourmadame.fr/wp-content/uploads/2018/12/181227.jpg&quot;
+}</pre>
+                    </div>
+                    <div class="request-info" style="clear: both" >
+                        <h3>Get a random picture URL</h3>
+                        <pre class="prettyprint"><b>GET</b> <a href="/api/random">/api/random</a></pre>
+                    </div>
+                    <div class="response-info">
+                        <pre class="prettyprint"><span class="meta nocode"><b>HTTP 200 OK</b>
+<b>Content-Type:</b> <span class="lit">application/json</span>
+<b>Vary:</b> <span class="lit">Accept</span>
+<b>Allow:</b> <span class="lit">GET</span>
+</span>{
+    &quot;description&quot;: &quot;Return a random url picture for bonjourmadame&quot;,
+    &quot;node&quot;: &quot;30fb3d5ac12b&quot;,
+    &quot;title&quot;: &quot;BonjourMadame, Friday 23 (random)&quot;,
+    &quot;retry&quot;: 3,
+    &quot;url&quot;: &quot;https://i0.wp.com/bonjourmadame.fr/wp-content/uploads/2018/12/181227.jpg&quot;
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+       <script src="https://restframework.herokuapp.com/static/rest_framework/js/jquery-1.8.1-min.js"></script>
+       <script src="https://restframework.herokuapp.com/static/rest_framework/js/bootstrap.min.js"></script>
+       <script src="https://restframework.herokuapp.com/static/rest_framework/js/prettify-min.js"></script>
+       <script src="https://restframework.herokuapp.com/static/rest_framework/js/default.js"></script>
+    </body>
+</html>
