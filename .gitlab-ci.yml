@@ -7,7 +7,7 @@ variables:
   REGISTRY_DOCKER_IMAGE: "bonjourmadame-api-server"
   EXECUTE_PIPELINE_TEST_CUSTOM: "true"
 
-Test:
+Execute:
   extends: .execute_custom
   script:
     - docker container run -d --name ${CI_PROJECT_NAME}_${CI_PIPELINE_ID} registry.local/${CI_PROJECT_PATH}:pipeline-${CI_PIPELINE_ID}
