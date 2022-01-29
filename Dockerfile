@@ -14,7 +14,8 @@ RUN pip install -r requirements.txt
 FROM python:3.10-slim@sha256:2bac43769ace90ebd3ad83e5392295e25dfc58e58543d3ab326c3330b505283d
 
 LABEL name="BonjourMadame API Server" \
-    maintainer="Djerfy <djerfy@gmail.com>"
+    maintainer="Djerfy <djerfy@gmail.com>" \
+    contributor="Azrod <contact@mickael-stanislas.com>"
 
 RUN groupadd -g 999 python && \
     useradd -r -u 999 -g python python
@@ -34,5 +35,4 @@ USER 999
 
 ENV PATH="/usr/app/venv/bin:$PATH"
 CMD [ "gunicorn", "--bind", "0.0.0.0:5000", "bm-api-server:app","--capture-output", "--log-level", "debug" ]
-# CMD [ "/bin/bash" ]
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl -f https://localhost:5000/health
