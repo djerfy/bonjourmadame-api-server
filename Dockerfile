@@ -1,6 +1,6 @@
-FROM python:3.10-slim as build
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends \
+FROM python:3.10-slim AS build
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     build-essential gcc 
 
 WORKDIR /usr/app
@@ -14,13 +14,17 @@ RUN pip install -r requirements.txt
 FROM python:3.10-slim@sha256:2bac43769ace90ebd3ad83e5392295e25dfc58e58543d3ab326c3330b505283d
 
 LABEL name="BonjourMadame API Server" \
-    maintainer="Djerfy <djerfy@gmail.com>" \
-    contributor="Azrod <contact@mickael-stanislas.com>"
+      maintainer="Djerfy <djerfy@gmail.com>" \
+      contributor="Azrod <contact@mickael-stanislas.com>"
 
 RUN groupadd -g 999 python && \
-    useradd -r -u 999 -g python python
+    useradd -r -u 999 -g python python && \
+    apt-get update && \
+    apt-get install -y curl && \
+    rm -rf /var/lib/{apt,dpkg,cache,log} && \
+    mkdir /usr/app && \
+    chown python:python /usr/app
 
-RUN mkdir /usr/app && chown python:python /usr/app
 WORKDIR /usr/app
 
 COPY --chown=python:python --from=build /usr/app/venv ./venv
