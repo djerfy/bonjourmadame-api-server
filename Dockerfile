@@ -1,18 +1,38 @@
-FROM ubuntu:20.04
+FROM python:3.10-slim as build
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends \
+    build-essential gcc 
+
+WORKDIR /usr/app
+RUN python -m venv /usr/app/venv
+ENV PATH="/usr/app/venv/bin:$PATH"
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+
+FROM python:3.10-slim@sha256:2bac43769ace90ebd3ad83e5392295e25dfc58e58543d3ab326c3330b505283d
 
 LABEL name="BonjourMadame API Server" \
-      maintainer="Djerfy <djerfy@gmail.com>"
+    maintainer="Djerfy <djerfy@gmail.com>" \
+    contributor="Azrod <contact@mickael-stanislas.com>"
 
-ENV VERSION=1.9.6
+RUN groupadd -g 999 python && \
+    useradd -r -u 999 -g python python
 
-RUN apt-get update && \
-    apt-get install -y wget python3 python3-pip && \
-    pip3 install flask requests && \
-    apt-get clean && \
-    rm -Rf /var/cache/apt/archives/* ~/.cache/pip
+RUN mkdir /usr/app && chown python:python /usr/app
+WORKDIR /usr/app
 
-ADD src /app
+COPY --chown=python:python --from=build /usr/app/venv ./venv
+COPY --chown=python:python ./src/ .
 
-RUN chmod +x /app/bm-api-server.py
-    
-ENTRYPOINT ["/usr/bin/python3", "/app/bm-api-server.py"]
+ENV VERSION=1.9.7
+ENV FLASK_APP=bm-api-server.py
+ENV FLASK_ENV=production
+ENV PYTHONUNBUFFERED=TRUE
+
+USER 999
+
+ENV PATH="/usr/app/venv/bin:$PATH"
+CMD [ "gunicorn", "--bind", "0.0.0.0:5000", "bm-api-server:app","--capture-output", "--log-level", "debug" ]
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl -f https://localhost:5000/health
