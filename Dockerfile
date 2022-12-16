@@ -50,4 +50,3 @@ COPY --chown=python:python ./src/ .
 USER 999
 
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "bm-api-server:app","--capture-output", "--log-level", "info", "--timeout", "900"]
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl -f https://localhost:5000/health
