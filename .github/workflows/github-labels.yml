@@ -1,0 +1,22 @@
+name: labels
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - "master"
+    paths:
+      - ".github/labels.yml"
+      - ".github/workflows/github-labels.yml"
+
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Run Labeler
+        uses: crazy-max/ghaction-github-labeler@v4
