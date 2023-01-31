@@ -49,4 +49,4 @@ COPY --chown=python:python ./src/ .
 
 USER 999
 
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "bm-api-server:app","--capture-output", "--log-level", "info", "--timeout", "900"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "bm-api-server:app", "--capture-output", "--log-level", "info", "--timeout", "900"]
