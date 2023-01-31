@@ -1,4 +1,4 @@
-name: labels
+name: Github Labels
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -13,7 +13,7 @@ on:
       - ".github/workflows/github-labels.yml"
 
 jobs:
-  labeler:
+  Labeler:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
