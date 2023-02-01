@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 
 
-app = Flask(__name__.split('.')[0])
+app = Flask(__name__.split('.')[0], static_url_path='/static')
 ver = os.environ['VERSION']
 bjrurl = "https://www.bonjourmadame.fr/"
 

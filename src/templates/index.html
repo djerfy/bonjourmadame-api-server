@@ -14,28 +14,21 @@
         height: 100vh;
       }
       @keyframes gradient {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
       }
-      a {
-        text-decoration: none;
-      }
+      a { text-decoration: none !important; color: inherit; }
+      .logo-center { margin-left: auto; margin-right: auto; width: auto; }
+      .accordion-body { margin-bottom: -40px !important; }
     </style>
   </head>
   <body>
     <header>
       <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container">
+        <div class="container logo-center">
           <a href="https://bonjourmadame.xorhak.io" class="navbar-brand d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            <strong>BonjourMadame API Server</strong>&nbsp;&nbsp;<span class="badge text-bg-light">v{{version}}</span>
+            <img src="/static/img/logo.png" height="40px" />
           </a>
         </div>
       </div>
@@ -44,7 +37,8 @@
       <section class="py-3 text-center container">
         <div class="row py-lg-5">
           <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light" style="color:white"><b>API Documentation</b></h1>
+            <h1 class="fw-light" style="color:white"><b>BonjourMadame API Server</b></h1>
+            <h2 class="fw-light" style="color:white">API Documentation</h2>
             <p>
               <a href="https://github.com/djerfy/bonjourmadame-api-server" class="btn btn-outline-light" style="color:white"><i class="fa-brands fa-github"></i> Follow on GitHub</a>
             </p>
@@ -120,7 +114,7 @@
     <div class="container">
       <span class="text-muted">
         <center>
-          &copy; 2019-2022  --  Made with ♥️ in France
+          2023 - Made with ♥️  in France - <a href="https://github.com/djerfy/bonjourmadame-api-server" alt="BonjourMadame API Server on Github" target="_blank"><i class="fab fa-github"></i>&nbsp;Github</a> - v{{version}}
         </center>
       </span>
     </div>
