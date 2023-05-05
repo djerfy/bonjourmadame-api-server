@@ -1,4 +1,4 @@
 beautifulsoup4==4.12.2
 Flask==2.3.2
-requests==2.29.0
+requests==2.30.0
 gunicorn==20.1.0
