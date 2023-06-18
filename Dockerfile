@@ -24,13 +24,14 @@ RUN pip install -r requirements.txt
 FROM python:3.11-slim
 
 LABEL name="BonjourMadame API Server" \
+      website="https://bonjourmadame.xorhak.fr" \
       repository="https://github.com/djerfy/bonjourmadame-api-server" \
       maintainer="Djerfy <djerfy@gmail.com>" \
       contributor="Azrod <contact@mickael-stanislas.com>"
 
 WORKDIR /usr/app
 
-ENV VERSION="1.9.18"
+ENV VERSION="1.9.19"
 ENV FLASK_APP="bm-api-server.py"
 ENV FLASK_DEBUG="False"
 ENV PYTHONUNBUFFERED="True"
