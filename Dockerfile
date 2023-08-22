@@ -31,7 +31,7 @@ LABEL name="BonjourMadame API Server" \
 
 WORKDIR /usr/app
 
-ENV VERSION="1.9.19"
+ENV VERSION="1.9.20"
 ENV FLASK_APP="bm-api-server.py"
 ENV FLASK_DEBUG="False"
 ENV PYTHONUNBUFFERED="True"
