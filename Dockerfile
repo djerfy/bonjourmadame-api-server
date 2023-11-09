@@ -11,7 +11,8 @@ ENV PATH="/usr/app/venv/bin:$PATH"
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential gcc && \
-    python -m venv /usr/app/venv
+    python -m venv /usr/app/venv && \
+    pip install --upgrade pip setuptools
 
 COPY requirements.txt .
 
@@ -31,7 +32,7 @@ LABEL name="BonjourMadame API Server" \
 
 WORKDIR /usr/app
 
-ENV VERSION="1.9.20"
+ENV VERSION="1.9.21"
 ENV FLASK_APP="bm-api-server.py"
 ENV FLASK_DEBUG="False"
 ENV PYTHONUNBUFFERED="True"
@@ -40,6 +41,7 @@ ENV PATH="/usr/app/venv/bin:$PATH"
 RUN groupadd -g 999 python && \
     useradd -r -u 999 -g python python && \
     apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y curl && \
     rm -rf /var/lib/{apt,dpkg,cache,log} && \
     mkdir -p /usr/app && \
