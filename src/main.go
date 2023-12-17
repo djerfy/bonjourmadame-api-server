@@ -225,10 +225,5 @@ func main() {
 	router.GET("/api/latest", latestHandler)
 	router.GET("/api/random", randomHandler)
 
-	port, exists := os.LookupEnv("PORT")
-	if !exists {
-		port = "8080"
-	}
-
-	router.Run(fmt.Sprintf(":%s", port))
+	router.Run()
 }
