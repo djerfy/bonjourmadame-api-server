@@ -15,8 +15,7 @@ RUN go get -d -v && \
 # Docker final environment #
 ############################
 
-#FROM scratch
-FROM golang:alpine
+FROM scratch
 
 LABEL name="BonjourMadame API Server" \
       website="https://bonjourmadame.xorhak.fr" \
