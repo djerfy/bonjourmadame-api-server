@@ -2,27 +2,21 @@
 # Docker build environment #
 ############################
 
-FROM python:3.11-slim AS build
+FROM golang:alpine AS build
 
-WORKDIR /usr/app
+WORKDIR /build
 
-ENV PATH="/usr/app/venv/bin:$PATH"
+COPY src .
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        build-essential gcc && \
-    python -m venv /usr/app/venv && \
-    pip install --upgrade pip setuptools
-
-COPY requirements.txt .
-
-RUN pip install -r requirements.txt
+RUN go get -d -v && \
+    go build -o bonjourmadame-api-server
 
 ############################
 # Docker final environment #
 ############################
 
-FROM python:3.11-slim
+#FROM scratch
+FROM golang:alpine
 
 LABEL name="BonjourMadame API Server" \
       website="https://bonjourmadame.xorhak.fr" \
@@ -30,26 +24,13 @@ LABEL name="BonjourMadame API Server" \
       maintainer="Djerfy <djerfy@gmail.com>" \
       contributor="Azrod <contact@mickael-stanislas.com>"
 
-WORKDIR /usr/app
+WORKDIR /app
 
-ENV VERSION="1.9.21"
-ENV FLASK_APP="bm-api-server.py"
-ENV FLASK_DEBUG="False"
-ENV PYTHONUNBUFFERED="True"
-ENV PATH="/usr/app/venv/bin:$PATH"
+ENV VERSION="2.0.0"
+ENV GIN_MODE="release"
 
-RUN groupadd -g 999 python && \
-    useradd -r -u 999 -g python python && \
-    apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y curl && \
-    rm -rf /var/lib/{apt,dpkg,cache,log} && \
-    mkdir -p /usr/app && \
-    chown python:python /usr/app
+COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build /build/bonjourmadame-api-server .
+COPY --from=build /build/assets .
 
-COPY --chown=python:python --from=build /usr/app/venv ./venv
-COPY --chown=python:python ./src/ .
-
-USER 999
-
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "bm-api-server:app", "--capture-output", "--log-level", "info", "--timeout", "900"]
+CMD ["/app/bonjourmadame-api-server"]
