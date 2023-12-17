@@ -159,20 +159,6 @@ func defineVersion() string {
 	return version
 }
 
-func LoggerFormatter(p gin.LogFormatterParams) string {
-	return fmt.Sprintf("%s - [%s] \"%s %s %s %d %s \"%s\" %s\"\n",
-		p.ClientIP,
-		p.TimeStamp.Format(time.RFC1123),
-		p.Method,
-		p.Path,
-		p.Request.Proto,
-		p.StatusCode,
-		p.Latency,
-		p.Request.UserAgent(),
-		p.ErrorMessage,
-	)
-}
-
 func healthHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"status": "healthy"})
 }
