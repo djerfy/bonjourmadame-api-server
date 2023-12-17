@@ -212,20 +212,20 @@ func randomHandler(c *gin.Context) {
 }
 
 func main() {
-	router := gin.New()
+	r := gin.New()
 
-	router.Use(gin.LoggerWithFormatter(LoggerFormatter))
-	router.Use(gin.Recovery())
+	r.Use(gin.LoggerWithFormatter(LoggerFormatter))
+	r.Use(gin.Recovery())
 
-	router.Static("/static", "./static")
-	router.LoadHTMLGlob("./templates/*")
+	r.Static("/static", "./static")
+	r.LoadHTMLGlob("./templates/*.html")
 
-	router.GET("/", indexHandler)
-	router.GET("/api/ping", pingHandler)
-	router.GET("/api/health", healthHandler)
-	router.GET("/api/version", versionHandler)
-	router.GET("/api/latest", latestHandler)
-	router.GET("/api/random", randomHandler)
+	r.GET("/", indexHandler)
+	r.GET("/api/ping", pingHandler)
+	r.GET("/api/health", healthHandler)
+	r.GET("/api/version", versionHandler)
+	r.GET("/api/latest", latestHandler)
+	r.GET("/api/random", randomHandler)
 
-	router.Run()
+	r.Run()
 }
