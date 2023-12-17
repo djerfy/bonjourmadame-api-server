@@ -215,6 +215,8 @@ func main() {
 	router := gin.New()
 
 	router.Use(gin.LoggerWithFormatter(LoggerFormatter))
+	router.Use(gin.Recovery())
+
 	router.Static("/static", "./static")
 	router.LoadHTMLGlob("./templates/*")
 
