@@ -212,10 +212,7 @@ func randomHandler(c *gin.Context) {
 }
 
 func main() {
-	r := gin.New()
-
-	r.Use(gin.LoggerWithFormatter(LoggerFormatter))
-	r.Use(gin.Recovery())
+	r := gin.Default()
 
 	r.Static("/static", "./static")
 	r.LoadHTMLGlob("./templates/*.html")
