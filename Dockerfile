@@ -6,9 +6,9 @@ FROM golang:alpine AS build
 
 WORKDIR /build
 
-COPY src .
+COPY . .
 
-RUN go get -d -v && \
+RUN go mod tidy && \
     go build -o bonjourmadame-api-server
 
 ############################
@@ -30,7 +30,7 @@ ENV GIN_MODE="release"
 
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build /build/bonjourmadame-api-server ./bonjourmadame-api-server
-COPY --from=build /build/static ./static
-COPY --from=build /build/templates ./templates
+COPY --from=build /build/resources/static ./static
+COPY --from=build /build/resources/templates ./templates
 
 CMD ["/app/bonjourmadame-api-server"]
