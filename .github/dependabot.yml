@@ -16,15 +16,15 @@ updates:
       - "djerfy"
     reviewers:
       - "djerfy"
-  # python dependencies
-  - package-ecosystem: "pip"
+  # golang dependencies
+  - package-ecosystem: "gomod"
     directory: "/"
     schedule:
       interval: "daily"
       time: "08:00"
       timezone: "Europe/Paris"
     commit-message:
-      prefix: "dependabot(python-pip): "
+      prefix: "dependabot(golang-deps): "
     labels:
       - ":game_die: dependencies"
       - ":robot: bot"
