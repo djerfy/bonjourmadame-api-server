@@ -25,7 +25,7 @@ LABEL name="BonjourMadame API Server" \
 
 WORKDIR /app
 
-ENV VERSION="2.0.1"
+ENV VERSION="2.0.2"
 ENV GIN_MODE="release"
 
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
