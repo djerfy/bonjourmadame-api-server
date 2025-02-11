@@ -118,8 +118,6 @@ func getURL(action string) (string, int, string) {
 			log.Fatal(err)
 		}
 
-		println(string(body))
-
 		p := parseHTML(string(body))
 		if imgUrl, ok := p["imgUrl"].(string); ok {
 			pictureURL = imgUrl
