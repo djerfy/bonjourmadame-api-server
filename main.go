@@ -31,10 +31,6 @@ func randomDate() time.Time {
 	return start.Add(time.Duration(randomSeconds) * time.Second)
 }
 
-func formatDate(date time.Time) string {
-	return date.Format("2006-01-02")
-}
-
 func formatURI(date time.Time) string {
 	return fmt.Sprintf("%d/%02d/%02d/", date.Year(), date.Month(), date.Day())
 }
@@ -71,7 +67,7 @@ func parseHTML(body string) map[string]interface{} {
 
 	result := make(map[string]interface{})
 
-	if img := doc.Find("div.post-content img.alignnone"); img.Length() > 0 {
+	if img := doc.Find("div.post-content img.aligncenter"); img.Length() > 0 {
 		if imgUrl, exists := img.Attr("src"); exists {
 			tmp := urljoin(imgUrl, imgUrl)
 			result["imgUrl"] = strings.Split(tmp, "?")[0]
@@ -122,9 +118,15 @@ func getURL(action string) (string, int, string) {
 			log.Fatal(err)
 		}
 
+		println(string(body))
+
 		p := parseHTML(string(body))
-		pictureURL = p["imgUrl"].(string)
-		pageTitle = p["title"].(string)
+		if imgUrl, ok := p["imgUrl"].(string); ok {
+			pictureURL = imgUrl
+		}
+		if title, ok := p["title"].(string); ok {
+			pageTitle = title
+		}
 
 		if p["tipee"].(bool) {
 			retriesNow++
