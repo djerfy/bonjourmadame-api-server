@@ -1,11 +1,12 @@
 module github.com/djerfy/bm
 
-go 1.23
+go 1.23.0
+
 toolchain go1.24.1
 
 require (
 	github.com/PuerkitoBio/goquery v1.10.3
-	github.com/gin-gonic/gin v1.10.0
+	github.com/gin-gonic/gin v1.10.1
 	github.com/google/uuid v1.6.0
 )
 
