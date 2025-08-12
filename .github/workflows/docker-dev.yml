@@ -30,7 +30,7 @@ jobs:
       packages: write
     steps:       
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup qemu
         uses: docker/setup-qemu-action@v3
       - name: Setup buildx
